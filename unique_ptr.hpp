@@ -15,9 +15,8 @@ public:
     explicit unique_ptr(T* t, Deleter d) : pointer(t), deleter(d) { }
 
     ~unique_ptr(){
-        deleter(pointer);
+        if(pointer) { deleter(pointer);}
     }
-
 
     unique_ptr(const unique_ptr& other) = delete;
     unique_ptr& operator=(const unique_ptr& other) = delete;
@@ -31,10 +30,11 @@ public:
         return *this;
     }    
 
-
-    void reset(T* ptr = nullptr) { 
-        deleter(pointer);
+    void reset(T* ptr = nullptr) noexcept { 
+        T* old = pointer;
         pointer = ptr;
+
+        if(old) { deleter(old); }
     }
 
     T* release(){

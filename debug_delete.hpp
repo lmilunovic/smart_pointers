@@ -3,7 +3,6 @@
 #include <iostream>
 namespace custom {
 
-// TODO make it useable with std::unique_ptr<T>
 template <typename T>
 class debug_delete 
 {
@@ -13,7 +12,7 @@ public:
 
     void operator()(T* p) const
     {
-        os << "Deleting unique_ptr" << std::endl; delete p;
+        os << "Deleting unique_ptr: " << p << std::endl; delete p;
     }
 
 private:

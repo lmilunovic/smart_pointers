@@ -18,23 +18,24 @@ public:
         deleter(pointer);
     }
 
-    void reset(T* ptr = nullptr) { 
-        deleter(ptr);
-        pointer = ptr;
-    }
 
     unique_ptr(const unique_ptr& other) = delete;
     unique_ptr& operator=(const unique_ptr& other) = delete;
     
-    // TODO handle deleter too
-    unique_ptr(unique_ptr&& u) {
-       *this = std::move(u);
+    unique_ptr(unique_ptr&& other) {
+       this->swap(other);
     }   
    
     unique_ptr& operator=(unique_ptr&& other) {
         this->swap(other);
         return *this;
     }    
+
+
+    void reset(T* ptr = nullptr) { 
+        deleter(pointer);
+        pointer = ptr;
+    }
 
     T* release(){
         T* p = pointer;
@@ -57,7 +58,7 @@ public:
         return pointer;
     }
 
-    T operator*() const {
+    T operator*() const{
         return *pointer;
     }
 

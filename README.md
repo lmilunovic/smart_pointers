@@ -1,0 +1,1 @@
+Custom implementation of C++ smart pointers. Intention: learning.

@@ -58,7 +58,7 @@ public:
         return pointer;
     }
 
-    T operator*() const{
+    T& operator*() const{
         return *pointer;
     }
 

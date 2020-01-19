@@ -47,16 +47,19 @@ public:
         std::swap(this->pointer, other.pointer);
     }
 
-    T* get(){ return pointer; }
+    T* get() const { return pointer; }
 
-    Deleter get_deleter() { return deleter; }
+    Deleter get_deleter() const { return deleter; }
 
-    bool empty() { return !pointer; }
+    bool empty() const { return !pointer; }
 
-    // TODO overload:
-    // operator*
-    // operator->
+    T* operator->() const {
+        return pointer;
+    }
 
+    T operator*() const {
+        return *pointer;
+    }
 
 private: 
     T* pointer;
